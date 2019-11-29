@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CyApplication</string>
+    <string name="helloworld">HelloWorld</string>
 </resources>
