@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.gliet.cyapplication">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:name=".ChangyiApp"
         android:allowBackup="true"

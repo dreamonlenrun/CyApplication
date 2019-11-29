@@ -3,6 +3,7 @@ package com.example.changyi_core.net;
 import com.example.changyi_core.app.ChangYi;
 import com.example.changyi_core.app.ConfigType;
 
+import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -10,6 +11,14 @@ import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RestCreator {
+
+    private static final class ParamsHolder{
+        public static  final WeakHashMap<String,Object> PARAMS = new WeakHashMap<>();
+    }
+
+    public static WeakHashMap getParams(){
+        return  ParamsHolder.PARAMS;
+    }
     public static RestService getRestService(){
         return RestServiceHolder.REST_SERVICES;
     }
