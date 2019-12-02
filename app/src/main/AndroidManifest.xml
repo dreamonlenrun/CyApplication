@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory"
-        android:appComponentFactory="任意字符"
+        android:appComponentFactory="whateverString"
         >
         <activity android:name=".AppActivity">
             <intent-filter>
