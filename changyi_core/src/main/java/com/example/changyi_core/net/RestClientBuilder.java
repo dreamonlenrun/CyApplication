@@ -9,6 +9,7 @@ import com.example.changyi_core.net.callback.ISuccess;
 import com.example.changyi_core.ui.LoaderStyle;
 
 
+import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -23,9 +24,13 @@ public class RestClientBuilder {
     private IFailure mIFailure = null;
     private IError mIError = null;
     private RequestBody mBody = null;
+    private File mFile = null;
     private Context mContext = null;
     private LoaderStyle mLoaderStyle = null;
 
+    private String mDownloadDir = null;
+    private String mExtension = null;
+    private String mName = null;
 
     public RestClientBuilder() {
     }
@@ -39,35 +44,47 @@ public class RestClientBuilder {
         PARAMS.putAll(params);
         return this;
     }
-    public final RestClientBuilder params(String key,Object value) {
+
+    public final RestClientBuilder params(String key, Object value) {
         PARAMS.put(key, value);
         return this;
     }
 
-    public final  RestClientBuilder raw(String raw){
-        this.mBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"),raw);
+    public final RestClientBuilder file(File file) {
+        this.mFile = file;
+        return this;
+    }
+    public final RestClientBuilder file(String file) {
+        this.mFile = new File(file);
         return this;
     }
 
-    public final RestClientBuilder onRequest(IRequest iRequest){
+    public final RestClientBuilder raw(String raw) {
+        this.mBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), raw);
+        return this;
+    }
+
+    public final RestClientBuilder onRequest(IRequest iRequest) {
         this.mIRequest = iRequest;
         return this;
     }
 
-    public final RestClientBuilder success(ISuccess iSuccess){
+    public final RestClientBuilder success(ISuccess iSuccess) {
         this.mISuccess = iSuccess;
         return this;
     }
-    public final RestClientBuilder failure(IFailure iFailure){
+
+    public final RestClientBuilder failure(IFailure iFailure) {
         this.mIFailure = iFailure;
         return this;
     }
-    public final RestClientBuilder error(IError iError){
+
+    public final RestClientBuilder error(IError iError) {
         this.mIError = iError;
         return this;
     }
 
-    public final RestClientBuilder loader(Context context,LoaderStyle loaderStyle){
+    public final RestClientBuilder loader(Context context, LoaderStyle loaderStyle) {
         this.mContext = context;
         this.mLoaderStyle = loaderStyle;
         return this;
@@ -79,8 +96,23 @@ public class RestClientBuilder {
         return this;
     }
 
-    public final RestClient build(){
-        return new RestClient(mUrl,PARAMS,mIRequest,mISuccess,mIFailure,mIError,mBody,mContext,mLoaderStyle);
+    public final RestClientBuilder dir(String dir){
+        this.mDownloadDir = dir;
+        return this;
+    }
+    public final RestClientBuilder extention(String extension){
+        this.mExtension = extension;
+        return this;
+    }
+        public final RestClientBuilder name(String name){
+        this.mName = name;
+        return this;
+    }
+
+
+    public final RestClient build() {
+        return new RestClient(mUrl, PARAMS,mDownloadDir,mExtension,mName, mIRequest, mISuccess,
+                mIFailure, mIError, mBody,mFile, mContext, mLoaderStyle);
     }
 
 }

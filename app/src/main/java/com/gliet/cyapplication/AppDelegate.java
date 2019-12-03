@@ -27,12 +27,12 @@ public class AppDelegate extends ChangYiDelegate {
 
     private void testRestClient() {
         RestClient.builder()
-                .url("https://news.baidu.com/")
+                .url("http://127.0.0.1/test")
                 .loader(getContext())
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                       // Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
                         Log.d("tttt",response);
                     }
                 })
